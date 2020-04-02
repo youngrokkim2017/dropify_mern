@@ -9,6 +9,10 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI; // this gives back an object
 // get user router
 const users = require('./routes/api/users');
+// get music router
+// const music = require('./routes/api/music');
+// Import user model
+const User = require('./models/User');
 
 // have mongoose connect to the URI
 mongoose
@@ -17,12 +21,24 @@ mongoose
     .catch(err => console.log(err)); // catch any errors
 
 // app is 'listening' for get requests
+// home route
 app.get("/", (req, res) => {
+    // create new user
+    const user = new User({
+        handle: 'pat',
+        email: 'pat@email.com',
+        password: '123456'
+    });
+    // save new user
+    user.save();
+
     res.send("Hello World!");
 });
 
 // if the route matches, then use the object
 app.use('/api/users', users);
+// FOR OTHER ROUTES LIKE MUSIC??
+// app.user('/api/music', music);
 
 // need to tell the app object to listen on a given port
 const port = process.env.PORT || 5000;
