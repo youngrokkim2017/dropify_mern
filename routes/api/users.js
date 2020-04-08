@@ -1,7 +1,13 @@
+// THIS IS THE USERS JS ROUTE
+
 const express = require('express');
 const router = express.Router(); // gets a router object
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
+// import key, contaings the secret key
+const keys = require('../../config/keys');
+// import jwt
+const jwt = require('jsonwebtoken');
 
 // ADD ROUTES
 router.get('/test', (req, res) => {
@@ -53,6 +59,63 @@ router.post('/register', (req, res) => {
                 //     .catch(err => res.send(err));
             }
         });
-})
+});
+
+// LOGIN ROUTE SETUP
+// jwt authentication for a persistent login
+// Check if email and user match up
+router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // look up user by that email and verify if they have the correct password using bcrypt
+    // to look up user using passport, use User model from mongoose
+    User.findOne({ email }) // returns a promise
+        .then(user => {
+            // see if we found a user
+            if (!user) {
+                return res.status(404).json({ email: 'This user does not exist.' });
+            }
+
+            // use bcrypt to check if the client input the correct password
+            // and check if password has been hashed
+            // pass in the password that was provided and the actual user.password
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {  // gets a boolean back
+                    if (isMatch) {
+                        // res.json({ msg: 'Success' });
+
+                        // create json web token and send it back to the client after they login
+                        // first create the paylod we want to send back
+                        const payload = {
+                            // contains all the user info the client might want
+                            // comes from mongoDB
+                            id: user.id,
+                            handle: user.handle,
+                            email: user.email,
+                        };
+
+                        // want to use jwt module to create the jwt
+                        jwt.sign(
+                            // first arg is payload
+                            payload,
+                            // second arg is secretOrKey
+                            keys.secretOrKey,
+                            // third arg is an options hash, want jwt to expire in 3600
+                            { expiresIn: 3600 },
+                            // fourth arg is a callback function once you hvae created the jwt
+                            (err, token) => {
+                                res.json({
+                                    success: true,
+                                    token: "Bearer " + token,
+                                });
+                            }
+                        );
+                    } else {
+                        return res.status(400).json({ password: 'Incorrect password' });
+                    }
+                }); 
+        });
+});
 
 module.exports = router;
