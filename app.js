@@ -14,11 +14,21 @@ const users = require('./routes/api/users');
 // Import user model
 const User = require('./models/User');
 
+// set up app to test using postman
+const bodyParser = require('body-parser'); // tells our app what type of requests it should respond to 
+
 // have mongoose connect to the URI
 mongoose
     .connect(db, { useNewUrlParser: true }) // .connect returns a promise
     .then(() => console.log('connected to mongoDB'))
     .catch(err => console.log(err)); // catch any errors
+
+// tell app to use body parser
+app.use(bodyParser.urlencoded({  // our app will respond to other apps like postman
+    extended: false
+}));
+
+app.use(bodyParser.json());
 
 // app is 'listening' for get requests
 // home route
