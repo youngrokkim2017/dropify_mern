@@ -16,6 +16,7 @@ const User = require('./models/User');
 
 // set up app to test using postman
 const bodyParser = require('body-parser'); // tells our app what type of requests it should respond to 
+const passport = require('passport');
 
 // have mongoose connect to the URI
 mongoose
@@ -30,20 +31,26 @@ app.use(bodyParser.urlencoded({  // our app will respond to other apps like post
 
 app.use(bodyParser.json());
 
-// app is 'listening' for get requests
-// home route
-app.get("/", (req, res) => {
-    // create new user
-    const user = new User({
-        handle: 'pat',
-        email: 'pat@email.com',
-        password: '123456'
-    });
-    // save new user
-    user.save();
+// add middleware for Passport
+// You can now delete our 'Hello World' route
+app.use(passport.initialize());
+// need to setup a configuration file for Passport
+require('./config/passport')(passport);
 
-    res.send("Hello World!");
-});
+// // app is 'listening' for get requests
+// // home route
+// app.get("/", (req, res) => {
+//     // create new user
+//     const user = new User({
+//         handle: 'pat',
+//         email: 'pat@email.com',
+//         password: '123456'
+//     });
+//     // save new user
+//     user.save();
+
+//     res.send("Hello World!");
+// });
 
 // if the route matches, then use the object
 app.use('/api/users', users);

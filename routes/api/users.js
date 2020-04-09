@@ -8,10 +8,21 @@ const bcrypt = require('bcryptjs');
 const keys = require('../../config/keys');
 // import jwt
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 // ADD ROUTES
 router.get('/test', (req, res) => {
     res.json({ msg: 'This is the user route' });
+});
+
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // res.json({ msg: 'Success' });
+    res.json({
+        id: req.user.id,
+        handle: req.user.handle,
+        email: req.user.email
+    });
+}
 });
 
 // route to register user (CREATE A NEW USER)
