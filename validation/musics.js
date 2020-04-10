@@ -29,7 +29,6 @@ module.exports = function validateMusicInput(data) {
     // also check its not empty
     // title
     if (Validator.isEmpty(data.title)) {
-    // if (!Validator.isEmpty(data.title)) {
         errors.title = 'Title field is required';
     };
 
