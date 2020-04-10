@@ -1,4 +1,5 @@
 // THIS IS THE USERS JS ROUTE
+// also holds controllers
 
 const express = require('express');
 const router = express.Router(); // gets a router object
@@ -9,6 +10,10 @@ const keys = require('../../config/keys');
 // import jwt
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+// import validations
+const validateRegisterInput = require('../../validation/register');
+// import validate login
+const validateLoginInput = require('../../validation/login');
 
 // ADD ROUTES
 router.get('/test', (req, res) => {
@@ -22,11 +27,21 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
         handle: req.user.handle,
         email: req.user.email
     });
-}
 });
 
 // route to register user (CREATE A NEW USER)
 router.post('/register', (req, res) => {
+    // VALIDATION FOR REGISTER
+    // first, call validateRegisterInput on req.body
+    // object destructuring to grab important parts
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    // do a check
+    if (!isValid) {
+        // if not valid
+        return res.status(400).json(errors); // sends the json object created in validations
+    }
+
     // look up if the user already exits based on the email, grabbing it from request body
     User.findOne({ email: req.body.email })
         .then(user => {
@@ -76,6 +91,13 @@ router.post('/register', (req, res) => {
 // jwt authentication for a persistent login
 // Check if email and user match up
 router.post('/login', (req, res) => {
+    // VALIDATION FOR LOGIN 
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
     const email = req.body.email;
     const password = req.body.password;
 
