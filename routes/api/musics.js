@@ -8,6 +8,36 @@ router.get('/test', (req, res) => {
     res.json({ msg: 'This is the music route' })
 });
 
+// INDEX route GET route to get all the music currently available
+router.get('/', (req, res) => {
+    // did not add passport.authenticate b/c doesn't matter which user is logged in
+    // use mongoose to get the index
+    Music
+        .find()
+        .sort({ date: -1 }) // sort by date in reverse order
+        .then(musics => res.json(musics))
+        .catch(err => res.status(400).json(err));
+});
+
+// GET look up all the musics by a give user
+router.get('/user/:user_id', (req, res) => {
+    // find the musics by the given id
+    Music
+        // search on the user field
+        .find({ user: req.params.user_id })
+        // then send back the music that we find
+        .then(musics => res.json(musics))
+        .catch(err => res.status(400).json(err));
+});
+
+// GET to a specific id 
+router.get('/:id', (req, res) => {
+    Music
+        .findById(req.params.id)
+        .then(music => res.json(music))
+        .catch(err => res.status(400).json(err));
+});
+
 // Add POST route, allows us to create a new music on the backend
 // and also want to add the user on the request using passport, import passport
 router.post('/', 
