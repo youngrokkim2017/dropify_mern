@@ -62,5 +62,5 @@ const port = process.env.PORT || 5000;
 
 // tell the app to listen
 app.listen(port, () => {
-    console.log(`listenting on port ${port}`)
+    console.log(`listening on port ${port}`)
 });
