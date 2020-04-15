@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// We will create this component shortly
 import Root from './components/root';
 import configureStore from './store/store';
 // use this to parse the user's session token
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
-// We have not created this action yet, but will do so in the next step
 import { logout } from './actions/session_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
 
+    // when the page loads
+    // decode the jwt 
+    // get the users info
+    // pass into redux store as a preloaded state
+
     // If a returning user has a session token stored in localStorage
     if (localStorage.jwtToken) {
-
         // Set the token as a common header for all axios requests
         setAuthToken(localStorage.jwtToken);
 
@@ -22,7 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const decodedUser = jwt_decode(localStorage.jwtToken);
 
         // Create a preconfigured state we can immediately add to our store
-        const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+        const preloadedState = {
+            session: { 
+                isAuthenticated: true, 
+                user: decodedUser,
+            } 
+        };
 
         store = configureStore(preloadedState);
 

@@ -78,13 +78,23 @@ export const login = (user) => dispatch => {
         .catch(err => {
             dispatch(receiveErrors(err.response.data));
         })
-}
+};
 
+// export const logout = () => dispatch => {
+//     // Remove the token from local storage
+//     localStorage.removeItem('jwtToken')
+//     // Remove the token from the common axios header
+//     APIUtil.setAuthToken(false)
+//     // Dispatch a logout action
+//     dispatch(logoutUser())
+// };
+
+// THUNK ACTION FOR LOGOUT
 export const logout = () => dispatch => {
-    // Remove the token from local storage
-    localStorage.removeItem('jwtToken')
-    // Remove the token from the common axios header
-    APIUtil.setAuthToken(false)
-    // Dispatch a logout action
-    dispatch(logoutUser())
+    // need to remove jwt key from local storage
+    localStorage.removeItem('jwtToken');
+    // take the jwt auth header off of axios as a default
+    APIUtil.setAuthToken(false);
+    // remove the user out of the redux store
+    dispatch(logoutUser());
 };
