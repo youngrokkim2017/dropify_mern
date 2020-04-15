@@ -28,28 +28,57 @@ export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
-// Upon signup, dispatch the approporiate action depending on which type of response we receieve from the backend
-export const signup = user => dispatch => (
-    APIUtil.signup(user).then(() => (
-        dispatch(receiveUserSignIn())
-    ), err => (
-        dispatch(receiveErrors(err.response.data))
-    ))
-);
+// THUNK ACTION
+// // Upon signup, dispatch the approporiate action depending on which type of response we receieve from the backend
+// export const signup = user => dispatch => ( 
+//     // this dispatch function is what is actually going to make the api call from the backend
+//     APIUtil.signup(user).then(() => (
+//         dispatch(receiveUserSignIn())
+//     ), err => (
+//         dispatch(receiveErrors(err.response.data))
+//     ))
+// );
 
-// Upon login, set the session token and dispatch the current user. Dispatch errors on failure.
-export const login = user => dispatch => (
-    APIUtil.login(user).then(res => {
-        const { token } = res.data;
-        localStorage.setItem('jwtToken', token);
-        APIUtil.setAuthToken(token);
-        const decoded = jwt_decode(token);
-        dispatch(receiveCurrentUser(decoded))
-    })
-    .catch(err => {
-        dispatch(receiveErrors(err.response.data));
-    })
-)
+// THUNK ACTION FOR SIGNUP
+export const signup = (user) => dispatch => {
+//     // this dispatch function is what is actually going to make the api call from the backend
+    return APIUtil.signup(user)
+        .then(() => dispatch(receiveUserSignIn()))
+        .catch(err => dispatch(receiveErrors(err.response.data)))
+};
+
+// // Upon login, set the session token and dispatch the current user. Dispatch errors on failure.
+// export const login = (user) => dispatch => (
+//     APIUtil.login(user).then(res => {
+//         const { token } = res.data;
+//         localStorage.setItem('jwtToken', token);
+//         APIUtil.setAuthToken(token);
+//         const decoded = jwt_decode(token);
+//         dispatch(receiveCurrentUser(decoded))
+//     })
+//     .catch(err => {
+//         dispatch(receiveErrors(err.response.data));
+//     })
+// );
+
+// THUNK ACTION FOR LOGIN
+export const login = (user) => dispatch => {
+    return APIUtil.login(user)
+        .then(res => {
+            const { token } = res.data;
+
+            // set jwt token on our local storage
+            // will remember out web token in different sessions
+            localStorage.setItem('jwtToken', token);
+            APIUtil.setAuthToken(token);
+            // next decode the token with the jwt decode library
+            const decoded = jwt_decode(token);
+            dispatch(receiveCurrentUser(decoded));
+        })
+        .catch(err => {
+            dispatch(receiveErrors(err.response.data));
+        })
+}
 
 export const logout = () => dispatch => {
     // Remove the token from local storage

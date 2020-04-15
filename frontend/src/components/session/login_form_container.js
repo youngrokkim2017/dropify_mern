@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // thunk action for login 
         login: user => dispatch(login(user))
     }
 }
