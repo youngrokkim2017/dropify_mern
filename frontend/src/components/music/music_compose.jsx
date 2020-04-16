@@ -7,7 +7,7 @@ class MusicCompose extends React.Component {
 
         this.state = {
             title: '',
-            authhor: '',
+            artist: '',
             genre: '',
             newMusic: ''
         };
@@ -24,7 +24,7 @@ class MusicCompose extends React.Component {
 
         let music = {
             title: this.state.title,
-            author: this.state.author,
+            artist: this.state.artist,
             genre: this.state.genre
         };
 
@@ -47,8 +47,23 @@ class MusicCompose extends React.Component {
                             type="textarea"
                             value={this.state.title}
                             onChange={this.update()}
-                            placeholder="Drop your music..."
+                            placeholder="Title"
                         />
+                        <br/>
+                        <input
+                            type="textarea"
+                            value={this.state.artist}
+                            onChange={this.update()}
+                            placeholder="Artist"
+                        />
+                        <br/>
+                        <input
+                            type="textarea"
+                            value={this.state.genre}
+                            onChange={this.update()}
+                            placeholder="Genre"
+                        />
+                        <br/>
                         <input type="submit" value="Submit" />
                     </div>
                 </form>

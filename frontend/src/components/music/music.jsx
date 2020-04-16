@@ -31,7 +31,7 @@ class Music extends React.Component {
                 <div>
                     <h2>All Music</h2>
                     {this.state.music.map(m => (
-                        <MusicBox key={m._id} title={m.title} author={m.author} genre={m.genre} />
+                        <MusicBox key={m._id} title={m.title} artist={m.artist} genre={m.genre} />
                     ))}
                 </div>
             );
