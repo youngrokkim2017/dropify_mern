@@ -20,7 +20,7 @@ class Music extends React.Component {
     }
 
     render() {
-        if (this.state.tweets.length === 0) {
+        if (this.state.music.length === 0) {
             return (
                 <div>
                     There is no Music
