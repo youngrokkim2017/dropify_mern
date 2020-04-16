@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
         composeMusic: data => dispatch(composeMusic(data))
     };
