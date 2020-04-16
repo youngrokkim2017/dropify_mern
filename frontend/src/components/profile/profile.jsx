@@ -16,7 +16,7 @@ class Profile extends React.Component {
     }
 
     componentWillReceiveProps(newState) {
-        this.setState({ music: newState.music };)
+        this.setState({ music: newState.music });
     }
 
     render() {
