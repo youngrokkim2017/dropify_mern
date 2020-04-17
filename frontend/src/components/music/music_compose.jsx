@@ -29,7 +29,7 @@ class MusicCompose extends React.Component {
         };
 
         this.props.composeMusic(music);
-        this.setState({ text: '' });
+        this.setState({ title: '' });
     }
 
     update() {
