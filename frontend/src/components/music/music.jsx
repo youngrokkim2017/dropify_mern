@@ -11,13 +11,16 @@ class Music extends React.Component {
         };
     }
 
-    componentWillMount() {
+    // componentWillMount() {
+    componentDidMount() {
         this.props.fetchMusic();
     }
 
-    componentWillReceiveProps(newState) {
-        this.setState({ music: newState.music });
-    }
+    // componentWillReceiveProps(newState) {
+    // componentDidUpdate(prevState) {
+    //     // this.setState({ music: newState.music });
+    //     this.setState({ music: prevState.music });
+    // }
 
     render() {
         if (this.state.music.length === 0) {

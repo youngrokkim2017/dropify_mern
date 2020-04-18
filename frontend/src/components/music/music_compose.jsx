@@ -9,15 +9,17 @@ class MusicCompose extends React.Component {
             title: '',
             artist: '',
             genre: '',
-            newMusic: ''
+            newMusic: '',
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ newMusic: nextProps.newMusic.title });
-    }
+    // componentWillReceiveProps(nextProps) {
+    // componentDidUpdate(prevProps) {
+    //     // this.setState({ newMusic: nextProps.newMusic.title });
+    //     // this.setState({ newMusic: prevProps.newMusic.title });
+    // }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -29,12 +31,18 @@ class MusicCompose extends React.Component {
         };
 
         this.props.composeMusic(music);
-        this.setState({ title: '' });
+        this.setState({
+            title: '',
+            artist: '',
+            genre: '',
+        });
     }
 
-    update() {
+    update(type) {
         return e => this.setState({
-            text: e.currentTarget.value
+            // text: e.currentTarget.value
+            // title: e.currentTarget.value
+            [type]: e.currentTarget.value
         });
     }
 
@@ -46,21 +54,21 @@ class MusicCompose extends React.Component {
                         <input 
                             type="textarea"
                             value={this.state.title}
-                            onChange={this.update()}
+                            onChange={this.update('title')}
                             placeholder="Title"
                         />
                         <br/>
                         <input
                             type="textarea"
                             value={this.state.artist}
-                            onChange={this.update()}
+                            onChange={this.update('artist')}
                             placeholder="Artist"
                         />
                         <br/>
                         <input
                             type="textarea"
                             value={this.state.genre}
-                            onChange={this.update()}
+                            onChange={this.update('genre')}
                             placeholder="Genre"
                         />
                         <br/>

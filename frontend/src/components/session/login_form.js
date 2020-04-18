@@ -16,13 +16,16 @@ class LoginForm extends React.Component {
     }
 
     // Once the user has been authenticated, redirect to the music index page
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.currentUser === true) {
+    // componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
+        // if (nextProps.currentUser === true) {
+        if (prevProps.currentUser === true) {
             this.props.history.push('/music');
         }
 
         // Set or clear errors
-        this.setState({ errors: nextProps.errors })
+        // this.setState({ errors: nextProps.errors });
+        // this.setState({ errors: prevProps.errors });
     }
 
     // Handle field updates (called in the render method)
