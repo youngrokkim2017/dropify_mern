@@ -23,7 +23,11 @@ class Music extends React.Component {
     // }
 
     render() {
-        if (this.state.music.length === 0) {
+        // console.log(this.state);
+        // console.log(this.props.music);
+
+        // if (this.state.music.length === 0) {
+        if (this.props.music.length === 0) {
             return (
                 <div>
                     There is no Music
@@ -33,7 +37,8 @@ class Music extends React.Component {
             return (
                 <div>
                     <h2>All Music</h2>
-                    {this.state.music.map(m => (
+                    {this.props.music.map(m => (
+                    // {this.state.music.all.map(m => (
                         <MusicBox key={m._id} title={m.title} artist={m.artist} genre={m.genre} />
                     ))}
                 </div>
