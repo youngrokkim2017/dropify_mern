@@ -11,7 +11,9 @@ const MusicSchema = new Schema({
         // similar to active record association
         type: Schema.Types.ObjectId,
         // needs a reference, the model we want to associate it with
-        ref: 'musics',
+        ref: 'users',
+        // ref: 'music',
+        // ref: 'musics',
     },
     // text: {
     //     type: String,
@@ -37,5 +39,6 @@ const MusicSchema = new Schema({
 
 // Pass into mongoose.models
 const Music = mongoose.model('music', MusicSchema);
+// const Music = mongoose.model('musics', MusicSchema);
 
 module.exports = Music;
