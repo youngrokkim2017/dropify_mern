@@ -23,19 +23,19 @@ class Profile extends React.Component {
     // }
 
     render() {
-        console.log(this.props.music);
+        console.log(this.props);
 
         // if (this.state.music.length === 0) {
         if (this.props.music.length === 0) {
             return(
                 <div>
-                    This user has no Music
+                    {this.props.currentUser.handle} has no Music
                 </div>
             );
         } else {
             return (
                 <div>
-                    <h2>All of this User's Music</h2>
+                    <h2>All of {this.props.currentUser.handle}'s Music</h2>
                     {this.props.music.map(m => (
                     // {this.state.music.map(m => (
                         <MusicBox key={m._id} title={m.title} artist={m.artist} genre={m.genre} />
