@@ -7,6 +7,7 @@ class MusicBox extends React.Component {
                 <h3>{this.props.title}</h3>
                 <h3>{this.props.artist}</h3>
                 <h3>{this.props.genre}</h3>
+                {/* <h3>{this.props.user}</h3> */}
             </div>
         );
     };

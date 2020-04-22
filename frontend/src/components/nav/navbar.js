@@ -28,7 +28,7 @@ class NavBar extends React.Component {
         } else {
             return (
                 <div>
-                    <Link to={'/music'}>All Music</Link>
+                    <Link to={'/music'}>Browse</Link>
                     <Link to={'/signup'}>Signup</Link>
                     <Link to={'/login'}>Login</Link>
                 </div>
