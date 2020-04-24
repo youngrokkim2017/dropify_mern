@@ -45,7 +45,7 @@ class Music extends React.Component {
 
     render() {
         // console.log(this.state);
-        // console.log(this.props.music[0]);
+        console.log(this.props);
 
         // if (this.state.music.length === 0) {
         if (this.props.music.length === 0) {

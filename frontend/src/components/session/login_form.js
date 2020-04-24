@@ -63,6 +63,7 @@ class LoginForm extends React.Component {
     render() {
         return (
             <div>
+                <br />
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <input type="text"
@@ -77,7 +78,7 @@ class LoginForm extends React.Component {
                             placeholder="Password"
                         />
                         <br />
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Log In" />
                         {this.renderErrors()}
                     </div>
                 </form>

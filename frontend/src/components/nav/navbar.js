@@ -20,9 +20,10 @@ class NavBar extends React.Component {
             return (
                 <div>
                     <Link to={'/new_music'}>Drop</Link>
-                    <Link to={'/music'}>All Music</Link>
+                    <Link to={'/music'}>Browse</Link>
                     <Link to={'/profile'}>Profile</Link>
-                    <button onClick={this.logoutUser}>Logout</button>
+                    {/* <button onClick={this.logoutUser}>Log Out</button> */}
+                    <Link onClick={this.logoutUser}>Log Out</Link>
                 </div>
             );
         } else {
