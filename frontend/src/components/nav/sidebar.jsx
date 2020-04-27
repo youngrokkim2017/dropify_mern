@@ -7,6 +7,35 @@ class SideBar extends React.Component {
 
         this.openNav = this.openNav.bind(this);
         this.closeNav = this.closeNav.bind(this);
+        this.logoutUser = this.logoutUser.bind(this);
+        this.getLinks = this.getLinks.bind(this);
+    }
+
+    logoutUser(e) {
+        e.preventDefault();
+        this.props.logout();
+    }
+
+    getLinks() {
+        if (this.props.loggedIn) {
+            return (
+                <div>
+                    <Link to="/">Home</Link>
+                    <Link to={'/new_music'}>Drop</Link>
+                    <Link to={'/music'}>Browse</Link>
+                    <Link to={'/profile'}>Profile</Link>
+                    {/* <button onClick={this.logoutUser}>Log Out</button> */}
+                    <Link onClick={this.logoutUser}>Log Out</Link>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <Link to="/">Home</Link>
+                    <Link to={'/music'}>Browse</Link>
+                </div>
+            );
+        }
     }
 
     openNav(e) {
@@ -48,9 +77,7 @@ class SideBar extends React.Component {
                         <button className="closebtn" onClick={this.closeNav}>
                             &times;
                         </button>
-                        <Link to="/">Home</Link>
-                        <Link to="/music">Browse</Link>
-                        <Link to="/new_music">Drop Music</Link>
+                        {this.getLinks()}
                     </div>
 
                     <div id="main-id">

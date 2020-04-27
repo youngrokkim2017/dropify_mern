@@ -12,6 +12,15 @@ class Music extends React.Component {
         };
     }
 
+    // MAP PROPS
+    // static defaultProps = {
+    //     center: {
+    //       lat: 59.95,
+    //       lng: 30.33
+    //     },
+    //     zoom: 11
+    // };    
+
     // componentWillMount() {
     componentDidMount() {
         this.props.fetchMusic();
@@ -73,7 +82,7 @@ class Music extends React.Component {
                       genre={m.genre}
                     />
                   ))}
-                </div>
+                </div>       
               </div>
             );
         }
@@ -81,3 +90,19 @@ class Music extends React.Component {
 }
 
 export default withRouter(Music);
+
+
+// MAP EXAMPLE
+                // <div style={{ height: '100vh', width: '100%' }}>
+                //     <GoogleMapReact
+                //     bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+                //     defaultCenter={this.props.center}
+                //     defaultZoom={this.props.zoom}
+                //     >
+                //     <AnyReactComponent
+                //         lat={59.955413}
+                //         lng={30.337844}
+                //         text="My Marker"
+                //     />
+                //     </GoogleMapReact>
+                // </div> 
