@@ -1,4 +1,5 @@
 import React from 'react';
+import Autocomplete from 'react-google-autocomplete';
 import MusicBox from './music_box';
 
 class MusicCompose extends React.Component {
