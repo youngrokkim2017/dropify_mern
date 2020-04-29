@@ -1,6 +1,7 @@
 import React from 'react';
-import Autocomplete from 'react-google-autocomplete';
-import MusicBox from './music_box';
+// import Autocomplete from 'react-google-autocomplete';
+// import MusicBox from './music_box';
+import LocationSearch from './music_map/music_location_search';
 
 class MusicCompose extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class MusicCompose extends React.Component {
             title: '',
             artist: '',
             genre: '',
-            newMusic: '',
+            location: '',
+            // newMusic: '',
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +30,8 @@ class MusicCompose extends React.Component {
         let music = {
             title: this.state.title,
             artist: this.state.artist,
-            genre: this.state.genre
+            genre: this.state.genre,
+            location: this.state.location,
         };
 
         this.props.composeMusic(music);
@@ -36,6 +39,7 @@ class MusicCompose extends React.Component {
             title: '',
             artist: '',
             genre: '',
+            location: '',
         });
     }
 
@@ -48,6 +52,7 @@ class MusicCompose extends React.Component {
     }
 
     render() {
+        // console.log(this.state);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -73,11 +78,13 @@ class MusicCompose extends React.Component {
                             placeholder="Genre"
                         />
                         <br/>
+                        <LocationSearch />
+                        <br/>
                         <input type="submit" value="Submit" />
                     </div>
                 </form>
                 <br/>
-                <MusicBox text={this.state.newMusic} />
+                {/* <MusicBox text={this.state.newMusic} /> */}
             </div>
         );
     }

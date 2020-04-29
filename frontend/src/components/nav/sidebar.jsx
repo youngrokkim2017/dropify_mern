@@ -20,18 +20,18 @@ class SideBar extends React.Component {
         if (this.props.loggedIn) {
             return (
                 <div>
-                    <Link to="/">Home</Link>
+                    <Link to={'/'}>Home</Link>
                     <Link to={'/new_music'}>Drop</Link>
                     <Link to={'/music'}>Browse</Link>
                     <Link to={'/profile'}>Profile</Link>
                     {/* <button onClick={this.logoutUser}>Log Out</button> */}
-                    <Link onClick={this.logoutUser}>Log Out</Link>
+                    <Link to={'/'} onClick={this.logoutUser}>Log Out</Link>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <Link to="/">Home</Link>
+                    <Link to={'/'}>Home</Link>
                     <Link to={'/music'}>Browse</Link>
                 </div>
             );
