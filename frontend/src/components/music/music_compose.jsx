@@ -78,6 +78,13 @@ class MusicCompose extends React.Component {
                             placeholder="Genre"
                         />
                         <br/>
+                         <input
+                            type="textarea"
+                            value={this.state.location}
+                            onChange={this.update('location')}
+                            placeholder="Location"
+                        />
+                        <br/>
                         {/* <LocationSearch /> */}
                         <br/>
                         <input type="submit" value="Submit" />
