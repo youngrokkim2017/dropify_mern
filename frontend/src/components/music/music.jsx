@@ -80,6 +80,7 @@ class Music extends React.Component {
                       title={m.title}
                       artist={m.artist}
                       genre={m.genre}
+                      location={m.location}
                     />
                   ))}
                 </div>       

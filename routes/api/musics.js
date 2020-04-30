@@ -59,6 +59,7 @@ router.post('/',
             title: req.body.title,
             artist: req.body.artist,
             genre: req.body.genre,
+            location: req.body.location,
         });
 
         // THEN save the music and send the res

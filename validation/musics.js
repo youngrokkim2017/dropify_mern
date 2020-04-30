@@ -26,6 +26,11 @@ module.exports = function validateMusicInput(data) {
         errors.genre = 'Genre must be between 1 and 30 characters';
     };
 
+    // location
+    if (!Validator.isLength(data.location, { min: 1, max: 30 })) {
+        errors.location = 'Location must be between 1 and 30 characters';
+    };
+
     // also check its not empty
     // title
     if (Validator.isEmpty(data.title)) {
@@ -40,6 +45,11 @@ module.exports = function validateMusicInput(data) {
     // genre
     if (Validator.isEmpty(data.genre)) {
         errors.genre = 'Genre field is required';
+    };
+
+    // location
+    if (Validator.isEmpty(data.location)) {
+        errors.location = 'Location field is required';
     };
 
     // last return errors object
