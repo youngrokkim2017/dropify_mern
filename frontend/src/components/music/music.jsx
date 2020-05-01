@@ -10,6 +10,8 @@ class Music extends React.Component {
         this.state = {
             music: []
         };
+
+        this.handleAlphaSort = this.handleAlphaSort.bind(this);
     }
 
     // MAP PROPS
@@ -52,9 +54,21 @@ class Music extends React.Component {
     //     this.setState({ music: prevState.music });
     // }
 
+    handleAlphaSort() {
+      let titlesArr = this.props.music.map((m) => {
+        return m.title;
+      });
+
+      return titlesArr.sort();
+    }
+
     render() {
         // console.log(this.state);
-        console.log(this.props);
+        // console.log(this.props.music);
+
+        // this.props.music.map((m) => {
+        //   console.log(m.title);
+        // });
 
         // if (this.state.music.length === 0) {
         if (this.props.music.length === 0) {
@@ -67,8 +81,13 @@ class Music extends React.Component {
             return (
               <div>
                 {/* <div>
+                  <button onClick={this.handleAlphaSort}>A-Z</button>
+                </div> */}
+
+                {/* <div>
                   <MusicMap />
                 </div> */}
+                
                 {/* <br/> */}
                 <h2>All Music</h2>
                 {/* <br/> */}
