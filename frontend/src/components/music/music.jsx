@@ -8,9 +8,11 @@ class Music extends React.Component {
         super(props);
 
         this.state = {
-            music: []
+            music: [],
+            isNewestFirst: true,
         };
 
+        this.toggleSortDate = this.toggleSortDate.bind(this);
         this.handleAlphaSort = this.handleAlphaSort.bind(this);
     }
 
@@ -62,15 +64,32 @@ class Music extends React.Component {
       return titlesArr.sort();
     }
 
+    toggleSortDate(e) {
+      this.sortByDate();
+    }
+
+    sortByDate() {
+      const { music } = this.state;
+      let sortedMusic = music;
+      if (this.state.isNewestFirst) {
+        sortedMusic = music.sort((a, b) => a.date < b.date)
+      } else {
+        sortedMusic = music.sort((a, b) => a.date > b.date);
+      };
+
+      this.setState({
+        music: sortedMusic,
+        isNewestFirst: !this.state.isNewestFirst,
+      });
+    }
+
     render() {
-        // console.log(this.state);
-        // console.log(this.props.music);
+        console.log(this.state);
+        // console.log(this.props);
+        console.log(this.props.music);
 
-        // this.props.music.map((m) => {
-        //   console.log(m.title);
-        // });
+        const { music } = this.state;
 
-        // if (this.state.music.length === 0) {
         if (this.props.music.length === 0) {
             return (
                 <div>
@@ -80,19 +99,20 @@ class Music extends React.Component {
         } else {
             return (
               <div>
-                {/* <div>
-                  <button onClick={this.handleAlphaSort}>A-Z</button>
-                </div> */}
+                <div>
+                  {/* <button onClick={this.handleAlphaSort}>A-Z</button> */}
+                  <button onClick={this.toggleSortDate}>Date</button>
+                </div>
 
                 {/* <div>
                   <MusicMap />
                 </div> */}
-                
+
                 {/* <br/> */}
                 <h2>All Music</h2>
                 {/* <br/> */}
                 <div>
-                  {this.props.music.map((m) => (
+                  {music.map((m) => (
                     // {this.state.music.all.map(m => (
                     <MusicBox
                       key={m._id}
