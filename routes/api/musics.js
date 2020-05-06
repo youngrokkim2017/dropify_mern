@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 const validateMusicInput = require('../../validation/musics');
 const Music = require('../../models/Music');
+const Chat = require('../../models/Chat');
+const User = require('../../models/User');
 
 router.get('/test', (req, res) => {
     res.json({ msg: 'This is the music route' })
@@ -68,4 +70,44 @@ router.post('/',
     }
 );
 
-module.exports = router;
+// add a POST route 
+// create a chat
+router.post('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { errors, isValid } = validateChatInput(req.body);
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    };
+
+    const newChat = new Chat({
+        user: {
+            _id: req.user._id,
+            name: req.user.name,
+        },
+        music: req.params.musicId,
+        message: req.body.message,
+    });
+
+    newChat.save()
+        .then(chat => res.json(chat))
+        .catch(err => res.status(400).json(err))
+});
+
+// GET chats
+router.get('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Chat
+        .find({ music: req.params.musicId })
+        .then(chats => res.json(chats))
+});
+
+// // GETS users for the chat
+// router.get('/:musicId/chat/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     let music = [];
+
+//     Music.findById(req.params.musicId)
+//         .then(music => {
+//             // User.findById()
+//         })
+// });
+
+// module.exports = router;
