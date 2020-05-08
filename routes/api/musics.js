@@ -70,35 +70,40 @@ router.post('/',
     }
 );
 
-// add a POST route 
-// create a chat
-router.post('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateChatInput(req.body);
+////////////////////////// CHAT //////////////////////////
 
-    if (!isValid) {
-        return res.status(400).json(errors);
-    };
+// // add a POST route 
+// // create a chat
+// router.post('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     const { errors, isValid } = validateChatInput(req.body);
 
-    const newChat = new Chat({
-        user: {
-            _id: req.user._id,
-            name: req.user.name,
-        },
-        music: req.params.musicId,
-        message: req.body.message,
-    });
+//     if (!isValid) {
+//         return res.status(400).json(errors);
+//     };
 
-    newChat.save()
-        .then(chat => res.json(chat))
-        .catch(err => res.status(400).json(err))
-});
+//     const newChat = new Chat({
+//         user: {
+//             _id: req.user._id,
+//             name: req.user.name,
+//         },
+//         music: req.params.musicId,
+//         message: req.body.message,
+//     });
 
-// GET chats
-router.get('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Chat
-        .find({ music: req.params.musicId })
-        .then(chats => res.json(chats))
-});
+//     newChat.save()
+//         .then(chat => res.json(chat))
+//         .catch(err => res.status(400).json(err))
+// });
+
+// // GET chats
+// router.get('/:musicId/chat', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     Chat
+//         .find({ music: req.params.musicId })
+//         .then(chats => res.json(chats))
+// });
+
+////////////////////////// CHAT //////////////////////////
+
 
 // // GETS users for the chat
 // router.get('/:musicId/chat/users', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -110,4 +115,4 @@ router.get('/:musicId/chat', passport.authenticate('jwt', { session: false }), (
 //         })
 // });
 
-// module.exports = router;
+module.exports = router;

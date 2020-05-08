@@ -12,8 +12,8 @@ class Music extends React.Component {
             isNewestFirst: true,
         };
 
-        this.toggleSortDate = this.toggleSortDate.bind(this);
-        this.handleAlphaSort = this.handleAlphaSort.bind(this);
+        // this.toggleSortDate = this.toggleSortDate.bind(this);
+        // this.handleAlphaSort = this.handleAlphaSort.bind(this);
     }
 
     // MAP PROPS
@@ -112,8 +112,9 @@ class Music extends React.Component {
                 <h2>All Music</h2>
                 {/* <br/> */}
                 <div>
-                  {music.map((m) => (
-                    // {this.state.music.all.map(m => (
+                  {/* {music.map((m) => ( */}
+                    {/* {this.state.music.all.map(m => ( */}
+                  {this.props.music.map((m) => (
                     <MusicBox
                       key={m._id}
                       title={m.title}
