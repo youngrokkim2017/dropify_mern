@@ -5,6 +5,18 @@ const mongoose = require('mongoose');
 // need to access the schema
 const Schema = mongoose.Schema;
 
+const pointSchema = new Schema({
+    type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+    },
+    coordinates: {
+        type: [Number],
+        required: true,
+    },
+});
+
 // Define what it means to be a Music in our app
 const MusicSchema = new Schema({
     user: {
@@ -31,8 +43,12 @@ const MusicSchema = new Schema({
         type: String,
         required: true,
     },
+    // location: {
+    //     type: String,
+    //     required: true,
+    // },
     location: {
-        type: String,
+        type: pointSchema,
         required: true,
     },
     date: {
