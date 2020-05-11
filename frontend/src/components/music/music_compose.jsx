@@ -1,7 +1,7 @@
 import React from 'react';
 // import Autocomplete from 'react-google-autocomplete';
 // import MusicBox from './music_box';
-// import LocationSearch from './music_map/music_location_search';
+import LocationSearch from './music_map/music_location_search';
 
 class MusicCompose extends React.Component {
     constructor(props) {
@@ -85,9 +85,9 @@ class MusicCompose extends React.Component {
                             placeholder="Location"
                         />
                         <br/>
-                        {/* <LocationSearch /> */}
+                        <LocationSearch />
                         <br/>
-                        <input type="submit" value="Submit" />
+                        {/* <input type="submit" value="Submit" /> */}
                     </div>
                 </form>
                 <br/>
