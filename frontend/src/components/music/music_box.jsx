@@ -3,6 +3,8 @@ import '../../stylesheets/music_index_item.scss';
 
 class MusicBox extends React.Component {
     render() {
+        // table sorting
+        
         return (
             <div>
                 {/* <h3>{this.props.title}</h3>
