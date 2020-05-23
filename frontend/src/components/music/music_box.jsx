@@ -7,17 +7,17 @@ class MusicBox extends React.Component {
         
         return (
             <div>
-                {/* <h3>{this.props.title}</h3>
+                <h3>{this.props.title}</h3>
                 <h3>{this.props.artist}</h3>
                 <h3>{this.props.genre}</h3>
-                <h3>{this.props.location}</h3> */}
+                <h3>{this.props.location}</h3>
                 {/* <h3>{this.props.user}</h3> */}
                 <table>
                     <thead></thead>
                     <tr>
-                        <th>{this.props.title}</th>
+                        {/* <th>{this.props.title}</th>
                         <th>{this.props.artist}</th>
-                        <th>{this.props.genre}</th>
+                        <th>{this.props.genre}</th> */}
                         {/* <th>{this.props.location}</th> */}
                     </tr>
                 </table>
